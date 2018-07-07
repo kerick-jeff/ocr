@@ -1,14 +1,57 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+  <ion-navbar color="primary">
+    <ion-title>OChazer</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-card>
+    <ion-card-header style="border-bottom: 1px solid #f4f4f4">
+      <ion-icon name="md-information-circle" color="primary"></ion-icon>
+      INSTRUCTIONS
+    </ion-card-header>
+    <ion-card-content style="padding-top: 16px;">
+      <div style="margin-bottom: 10px;">
+        1. Tap on the button located at the bottom-left corner.
+      </div>
+      <div>
+        2. Select an action:
+        <div>
+          <button (click)="takePhoto()" ion-fab mini color="secondary">
+            <ion-icon name="ios-camera"></ion-icon>
+          </button>
+          Take a photo and process it.
+        </div>
+        <div>
+          <button (click)="selectPhoto()" ion-fab mini color="danger">
+            <ion-icon name="ios-images"></ion-icon>
+          </button>
+          Select a photo from your device's photo library and process it.
+        </div>
+        <div>
+          <button (click)="openLibrary()" ion-fab mini color="primary">
+            <ion-icon name="ios-folder"></ion-icon>
+          </button>
+          Choose a photo from the application's photo library and process it. 
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>    
+
+  <ion-fab right bottom>
+    <button ion-fab color="primary">
+      <ion-icon name="ios-arrow-dropup"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button (click)="takePhoto()" ion-fab color="secondary">
+        <ion-icon name="ios-camera"></ion-icon>
+      </button>
+      <button (click)="selectPhoto()" ion-fab color="danger">
+        <ion-icon name="ios-images"></ion-icon>
+      </button>
+      <button (click)="openLibrary()" ion-fab color="primary">
+        <ion-icon name="ios-folder"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 </ion-content>

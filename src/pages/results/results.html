@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Results</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="img-card" *ngIf="result.hasBase64Image; else png">
+    <img [src]="'data:image/png;base64,' + result.imageData"/>
+  </ion-card>
+
+  <ng-template #png>
+    <ion-card class="img-card">
+      <img [src]="result.imageData"/>
+    </ion-card>
+  </ng-template>
+
+  <ion-card>
+    <ion-card-header color="primary" style="font-weight: 700">Detected Label(s)</ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="result.labels">
+        <ion-item *ngFor="let label of result.labels">
+          • {{ label.description }} | <span style="color: #488aff">{{ label.score }}</span>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary" style="font-weight: 700">Detected Text(s)</ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="result.texts">
+        <ion-item *ngFor="let text of result.texts">
+          • {{ text.description }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header color="primary" style="font-weight: 700">Conclusion</ion-card-header>
+    <ion-card-content>
+      <div *ngIf="conclusion.isPlate; else notPlate">
+        <ion-list>
+          <ion-item>
+            • The image <span style="color: #32db64; font-weight: 700">contains</span> a vehicle registration plate
+          </ion-item>
+          <ion-item>
+            • The image contains the following text: <br/>
+            <span style="color: #32db64; font-weight: 700">{{ conclusion.textDesc }}</span>
+          </ion-item>
+          <ion-item *ngIf="conclusion.licensedInCam; else licensedElsewhere">
+            • The vehicle registration plate in the image <span style="color: #32db64; font-weight: 700">is licensed</span> in Cameroon
+          </ion-item>
+
+          <ng-template #licensedElsewhere>
+            <ion-item>
+              • The vehicle registration plate in the image <span style="color: #f53d3d; font-weight: 700">is not licensed</span> in Cameroon
+            </ion-item>
+          </ng-template>
+        </ion-list>
+      </div>
+
+      <ng-template #notPlate>
+        <ion-list>
+          <ion-item>
+            • The image <span style="color: #f53d3d; font-weight: 700">does not contain</span> a vehicle registration plate
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Library</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card (click)="detect(img)" *ngFor="let img of images" class="img-card">
+    <img [src]="'/assets/imgs/plates/' + img">
+  </ion-card>
+</ion-content>
