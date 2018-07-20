@@ -36,7 +36,7 @@ export class HomePage {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG | this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG || this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.CAMERA
     }
@@ -55,7 +55,7 @@ export class HomePage {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG | this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG || this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       correctOrientation: true

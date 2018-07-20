@@ -40,8 +40,6 @@ export class ResultsPage {
   }
 
   ionViewDidLoad() {
-    console.log('loaded')
-
     for (let i = 0; i < this.result.labels.length; i++) {
       const label = this.result.labels[i];
       
@@ -60,7 +58,5 @@ export class ResultsPage {
         break
       }
     }
-
-    console.log(this.conclusion)
   }
 }

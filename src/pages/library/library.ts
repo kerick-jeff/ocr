@@ -49,7 +49,7 @@ export class LibraryPage {
 
     loader.present().then(() => {
       this.vision.detectWithImageSource(s3Path).subscribe((result) => {
-        this.saveResults(`/assets/imgs/plates/${image}`, result)
+        this.saveResults(`assets/imgs/plates/${image}`, result)
         loader.dismiss()
         this.navCtrl.push(ResultsPage, {
           processed: this.processed
