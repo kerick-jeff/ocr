@@ -12,7 +12,6 @@ import { ResultsPage } from '../results/results';
 })
 export class LibraryPage {
   private processed = {} as {
-    hasBase64Image: boolean,
     imageData: any,
     results: any
   }
@@ -65,7 +64,6 @@ export class LibraryPage {
   }
 
   saveResults(imageData, results) {
-    this.processed.hasBase64Image = false
     this.processed.imageData = imageData
     this.processed.results = results
   }

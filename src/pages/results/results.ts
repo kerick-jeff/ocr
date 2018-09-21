@@ -8,7 +8,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ResultsPage {
   private result = {} as {
-    hasBase64Image: boolean,
     imageData: any, 
     labels: any,
     texts: any
@@ -25,7 +24,6 @@ export class ResultsPage {
     public navParams: NavParams
   ) { 
     let processed = this.navParams.get('processed')
-    this.result.hasBase64Image = processed.hasBase64Image
     this.result.imageData = processed.imageData
     this.result.labels = processed.results.responses[0].labelAnnotations
     this.result.texts = processed.results.responses[0].textAnnotations

@@ -14,7 +14,6 @@ import { UtilitiesProvider } from '../../providers/utilities/utilities';
 })
 export class HomePage {
   private processed = {} as {
-    hasBase64Image: boolean,
     imageData: any,
     results: any
   }
@@ -34,68 +33,58 @@ export class HomePage {
 
   takePhoto() {
     const options: CameraOptions = {
-      quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG || this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.CAMERA
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = `data:image/jpeg;base64,${imageData}`
-
-      this.detect(base64Image)
+      this.detect(imageData)
     }).catch((err) => {
-      this.utilities.alert('Error', err)
-      // 'Error occured while taking photo'
+      this.utilities.alert('Error', JSON.stringify(err))
     })
   }
 
   selectPhoto() {
     const options: CameraOptions = {
-      quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG || this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       correctOrientation: true
     }
 
     this.camera.getPicture(options).then((imageData) => {
-      let base64Image = `data:image/jpeg;base64,${imageData}`
-
-      this.detect(base64Image)
+      this.detect(imageData)
     }).catch((err) => {
-      this.utilities.alert('Error', err)
-      // 'Error occured while choosing photo'
+      this.utilities.alert('Error', JSON.stringify(err))
     })
   }
 
-  private detect(base64Image: any) {
+  private detect(imageData: any) {
     let loader = this.loadingCtrl.create({
       content: 'Decoding image...'
     })
     
     loader.present().then(() => {
-      this.vision.detectWithbase64Image(base64Image).subscribe((result) => {
-        this.saveResults(base64Image, result)
+      this.vision.detectWithbase64Image(imageData).subscribe((result) => {
+        this.saveResults(`data:image/jpeg;base64,${imageData}`, result)
         loader.dismiss()
         this.navCtrl.push(ResultsPage, {
           processed: this.processed
         })
       }, (err) => {
         loader.dismiss()
-        this.utilities.alert('Error', err)
-        // 'Error occured while detecting text'
+        this.utilities.alert('Error', JSON.stringify(err))
       })
     }).catch((err) => {
       loader.dismiss()
-      this.utilities.alert('Error', err)
+      this.utilities.alert('Error', JSON.stringify(err))
     })
   }
 
   private saveResults(imageData, results) {
-    this.processed.hasBase64Image = true
     this.processed.imageData = imageData
     this.processed.results = results
   }

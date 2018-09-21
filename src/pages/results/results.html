@@ -5,15 +5,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="img-card" *ngIf="result.hasBase64Image; else png">
-    <img [src]="'data:image/png;base64,' + result.imageData"/>
+  <ion-card class="img-card">
+    <img [src]="result.imageData"/>
   </ion-card>
-
-  <ng-template #png>
-    <ion-card class="img-card">
-      <img [src]="result.imageData"/>
-    </ion-card>
-  </ng-template>
 
   <ion-card>
     <ion-card-header color="primary" style="font-weight: 700">Detected Label(s)</ion-card-header>
